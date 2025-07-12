@@ -1,0 +1,313 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.yush-div-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+
+/* 导航栏背景色 */
+.navbar {
+  background-color: #bec1c5 !important;
+  margin-bottom: 10px;
+}
+
+.navbar.is-fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.navbar.is-fixed-top + * {
+  margin-top: 40px !important;
+}
+
+/* 导航项悬停效果 */
+.navbar-item:hover {
+  background-color: #74787c !important;
+  color: white !important;
+}
+
+/* 当前选中项高亮 */
+.navbar-item.is-active {
+  border-bottom: 2px solid #3498db;
+}
+
+/* 基础样式 */
+.authors-section {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* 团队名称样式 */
+.team-name {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+.team-name small {
+  font-size: 0.7em;
+  opacity: 0.8;
+}
+
+/* 移除原悬停相关样式 */
+.author-block {
+  display: inline !important; /* 强制显示所有作者 */
+}
+.publication-authors:hover .author-block {
+  display: inline !important; /* 取消悬停效果 */
+}
+
+/* 优化作者列表换行 */
+.author-list {
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+/* 机构信息换行优化 */
+.institution-info {
+  margin-top: 0.8rem;
+  line-height: 1.5;
+}
+
+/* 方案3的样式 */
+.logo-grid {
+  margin: 2rem 0;
+}
+.logo-placeholder-box {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+.logo-placeholder-box:hover {
+  background: #eee;
+}
+.logo-placeholder-box i {
+  color: #7a7a7a;
+  margin-bottom: 0.5rem;
+}
+
+/* 占位容器动画效果 */
+.image-placeholder {
+  transition: all 0.3s ease;
+  border: 2px dashed #dbdbdb;
+}
+.image-placeholder:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .image-placeholder {
+    padding: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* 视频占位容器 */
+.video-placeholder {
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  height: 100%;
+  transition: all 0.3s ease;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 占位图标 */
+.placeholder-icon {
+  color: #adb5bd;
+  margin-bottom: 1rem;
+}
+
+/* 标题样式 */
+.placeholder-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+/* 文件名提示 */
+.placeholder-filename {
+  font-size: 0.8rem;
+  color: #868e96;
+}
+
+/* 悬停效果 */
+.video-placeholder:hover {
+  background-color: #e9ecef;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .column.is-one-third {
+    flex: 0 0 100%;
+    padding: 0.75rem;
+  }
+}

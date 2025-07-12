@@ -190,6 +190,23 @@ body {
   border-bottom: 2px solid #3498db;
 }
 
+/* 移动端菜单控制 */
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  
+  .navbar-menu.is-active {
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+  }
+}
+
 /* 基础样式 */
 .authors-section {
   font-size: 1.1rem;

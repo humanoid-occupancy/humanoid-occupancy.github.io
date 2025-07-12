@@ -1,92 +1,103 @@
-window.HELP_IMPROVE_VIDEOJS = false;
-
-var INTERP_BASE = "./static/interpolation/stacked";
-var NUM_INTERP_FRAMES = 240;
-
-var interp_images = [];
-function preloadInterpolationImages() {
-  for (var i = 0; i < NUM_INTERP_FRAMES; i++) {
-    var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
-    interp_images[i] = new Image();
-    interp_images[i].src = path;
-  }
-}
-
-function setInterpolationImage(i) {
-  var image = interp_images[i];
-  image.ondragstart = function() { return false; };
-  image.oncontextmenu = function() { return false; };
-  $('#interpolation-image-wrapper').empty().append(image);
-}
-
-
-$(document).ready(function() {
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function() {
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      $(".navbar-burger").toggleClass("is-active");
-      $(".navbar-menu").toggleClass("is-active");
-
-    });
-
-    var options = {
-			slidesToScroll: 1,
-			slidesToShow: 3,
-			loop: true,
-			infinite: true,
-			autoplay: false,
-			autoplaySpeed: 3000,
-    }
-
-		// Initialize all div with carousel class
-    var carousels = bulmaCarousel.attach('.carousel', options);
-
-    // Loop on each carousel initialized
-    for(var i = 0; i < carousels.length; i++) {
-    	// Add listener to  event
-    	carousels[i].on('before:show', state => {
-    		console.log(state);
-    	});
-    }
-
-    // Access to bulmaCarousel instance of an element
-    var element = document.querySelector('#my-element');
-    if (element && element.bulmaCarousel) {
-    	// bulmaCarousel instance is available as element.bulmaCarousel
-    	element.bulmaCarousel.on('before-show', function(state) {
-    		console.log(state);
-    	});
-    }
-
-    /*var player = document.getElementById('interpolation-video');
-    player.addEventListener('loadedmetadata', function() {
-      $('#interpolation-slider').on('input', function(event) {
-        console.log(this.value, player.duration);
-        player.currentTime = player.duration / 100 * this.value;
-      })
-    }, false);*/
-    // preloadInterpolationImages();
-
-    // $('#interpolation-slider').on('input', function(event) {
-    //   setInterpolationImage(this.value);
-    // });
-    // setInterpolationImage(0);
-    // $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
-
-    bulmaSlider.attach();
-
-})
-
+/**
+ * 初始化所有交互组件
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  // ==================== 导航栏菜单 ====================
+  const navbarBurgers = Array.from(document.querySelectorAll('.navbar-burger'));
 
-  $navbarBurgers.forEach(el => {
-    el.addEventListener('click', () => {
-      const target = el.dataset.target;
-      const $target = document.getElementById(target);
-
-      el.classList.toggle('is-active');
-      $target.classList.toggle('is-active');
+  navbarBurgers.forEach(burger => {
+    burger.addEventListener('click', () => {
+      const targetId = burger.dataset.target;
+      const targetMenu = document.getElementById(targetId);
+      
+      // 切换激活状态
+      burger.classList.toggle('is-active');
+      targetMenu.classList.toggle('is-active');
+      
+      // 移动端专用：菜单展开时禁止页面滚动
+      if (window.innerWidth < 1024) {
+        document.body.style.overflow = 
+          targetMenu.classList.contains('is-active') ? 'hidden' : '';
+      }
     });
   });
+
+  // ==================== 轮播组件 ====================
+  if (typeof bulmaCarousel !== 'undefined') {
+    const carousels = bulmaCarousel.attach('.carousel', {
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      loop: true,
+      infinite: true,
+      autoplay: false,
+      autoplaySpeed: 3000,
+      breakpoints: [
+        { changePoint: 768, slidesToShow: 1 }, // 移动端单列显示
+        { changePoint: 1024, slidesToShow: 2 }  // 平板双列显示
+      ]
+    });
+
+    // 调试用：打印轮播状态
+    carousels.forEach(carousel => {
+      carousel.on('before:show', state => {
+        console.debug('Carousel state:', state);
+      });
+    });
+  }
+
+  // ==================== 滑动组件 ====================
+  if (typeof bulmaSlider !== 'undefined') {
+    bulmaSlider.attach();
+  }
+
+  // ==================== 图片预加载 ====================
+  const INTERP_BASE = "./static/interpolation/stacked";
+  const NUM_INTERP_FRAMES = 240;
+  const interpImages = [];
+
+  function preloadInterpolationImages() {
+    for (let i = 0; i < NUM_INTERP_FRAMES; i++) {
+      const path = `${INTERP_BASE}/${String(i).padStart(6, '0')}.jpg`;
+      interpImages[i] = new Image();
+      interpImages[i].src = path;
+      // 禁用图片拖拽和右键菜单
+      interpImages[i].ondragstart = () => false;
+      interpImages[i].oncontextmenu = () => false;
+    }
+  }
+
+  function setInterpolationImage(index) {
+    const wrapper = document.getElementById('interpolation-image-wrapper');
+    if (wrapper && interpImages[index]) {
+      wrapper.innerHTML = '';
+      wrapper.appendChild(interpImages[index]);
+    }
+  }
+
+  // 按需启用预加载
+  if (document.getElementById('interpolation-slider')) {
+    preloadInterpolationImages();
+    document.getElementById('interpolation-slider').addEventListener('input', (e) => {
+      setInterpolationImage(e.target.value);
+    });
+    // 初始化显示第一帧
+    setInterpolationImage(0);
+  }
 });
+
+/**
+ * 视频播放器辅助功能
+ */
+if (typeof videojs !== 'undefined') {
+  window.HELP_IMPROVE_VIDEOJS = false;
+  
+  const player = videojs('interpolation-video');
+  player.ready(() => {
+    const slider = document.getElementById('interpolation-slider');
+    if (slider) {
+      slider.addEventListener('input', (e) => {
+        player.currentTime = player.duration() * (e.target.value / 100);
+      });
+    }
+  });
+}

@@ -337,9 +337,9 @@ body {
 
 /* Logo图片基础样式 */
 .logo-image {
-  height: 90px; /* 固定高度 */
-  width: auto;  /* 宽度自适应 */
-  /* max-width: 180px; */
+  --logo-height: 110px; /* 默认值 */
+  height: var(--logo-height);
+  width: auto;
   object-fit: contain;
   filter: grayscale(20%);
   transition: all 0.3s ease;

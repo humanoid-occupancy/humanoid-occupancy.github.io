@@ -5,10 +5,10 @@
 
   <meta charset="utf-8">
   <!-- 基础SEO -->
-  <title>Title: The title of the paper</title>
+  <title>Humanoid Occupancy: Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots</title>
   <meta name="description"
-    content="Title: The title of the paper">
-  <meta name="keywords" content="keyword1, keyword2">
+    content="Humanoid Occupancy: Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots">
+  <meta name="keywords" content="Humanoid Robots, Occupancy Perception, Multimodal">
   <!-- 移动端适配 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./static/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="./static/images/robot.png">
 
   <script src="./static/js/jquerymin351.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -73,7 +73,6 @@
 
     <div id="navbarBasic" class="navbar-menu">
       <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <!-- 首页按钮 -->
         <a class="navbar-item" href="#home">
           <span class="icon">
             <i class="fas fa-home"></i>
@@ -81,7 +80,6 @@
           <span>Home</span>
         </a>
 
-        <!-- 摘要 -->
         <a class="navbar-item" href="#abstract">
           <span class="icon">
             <i class="fas fa-scroll"></i>
@@ -89,20 +87,33 @@
           <span>Abstract</span>
         </a>
 
-        <!-- 硬件配置 -->
-        <a class="navbar-item" href="#hardware">
+        <a class="navbar-item" href="#data">
           <span class="icon">
-            <i class="fas fa-microchip"></i>
+            <i class="fas fa-server"></i>
           </span>
-          <span>Hardware</span>
+          <span>Data</span>
         </a>
 
         <!-- 数据分析 -->
-        <a class="navbar-item" href="#performance">
+        <a class="navbar-item" href="#annotation">
           <span class="icon">
-            <i class="fas fa-chart-bar"></i>
+            <i class="fas fa-cubes"></i>
           </span>
-          <span>Performance</span>
+          <span>Annotation</span>
+        </a>
+
+        <a class="navbar-item" href="#method">
+          <span class="icon">
+            <i class="fas fa-project-diagram"></i>
+          </span>
+          <span>Method</span>
+        </a>
+
+        <a class="navbar-item" href="#results">
+          <span class="icon">
+            <i class="fas fa-chart-line"></i>
+          </span>
+          <span>Results</span>
         </a>
 
         <!-- 引用 -->
@@ -121,32 +132,33 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Title: The title of the paper</h1>
+            <h1 class="title is-1 publication-title">Humanoid Occupancy: Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots</h1>
             
             <div class="is-size-5 publication-authors">
               <!-- 直接显示完整作者列表（不再隐藏） -->
               <div class="author-list">
-                xxx<sup>1,∗</sup>, xxxx<sup>2,3,∗</sup>, xxx<sup>2,3,∗</sup>,
+                <!--xxx<sup>1,∗</sup>, xxxx<sup>2,3,∗</sup>, xxx<sup>2,3,∗</sup>,
                 xxx<sup>1,∗,†</sup>, xxx<sup>1,∗,†</sup>, xxx<sup>1</sup>, 
-                <!-- 其他作者... -->
                 xxx<sup>2,3</sup>
                 <span class="icon">
-                  <i class="fas fa-envelope"></i> <!-- 使用Font Awesome图标 -->
+                  <i class="fas fa-envelope"></i>
                 </span>,
                 xxx<sup>1</sup>
                 <span class="icon">
                   <i class="fas fa-envelope"></i>
                 </span>
+                 -->
+                Humanoid Occupancy Team
               </div>
 
               <!-- 作者身份说明 -->
               <div class="is-size-6 publication-authors">
-                <span>
+                <!-- <span>
                   <sup>*</sup>Co-first Authors, 
                   <sup><i class="fas fa-envelope"></i></sup>Corresponding Authors, 
                   <sup>†</sup>Project Leaders
                 </span>
-                <br>
+                <br> -->
                 
                 <!-- 机构信息 -->
                 <div class="institution-info">
@@ -156,27 +168,29 @@
               </div>
               
               <!-- 机构Logo -->
-              <div class="columns is-centered logo-grid">
+              <div class="columns is-centered">
+                <!-- 第一个Logo -->
                 <div class="column has-text-centered">
-                  <div class="logo-placeholder-box">
-                    <i class="fas fa-university fa-3x"></i>
-                    <p class="has-text-grey">X-Humanoid</p>
+                  <div class="logo-image-box">
+                    <img src="/static/images/x-humanoid-chinese-logo.png" 
+                        alt="X-Humanoid Logo"
+                        class="logo-image"
+                        loading="lazy">
+                    <!-- <p class="has-text-grey mt-2">X-Humanoid</p> -->
                   </div>
                 </div>
+
+                <!-- 第二个Logo -->
                 <div class="column has-text-centered">
-                  <div class="logo-placeholder-box">
-                    <i class="fas fa-robot fa-3x"></i>
-                    <p class="has-text-grey">Giga AI</p>
+                  <div class="logo-image-box">
+                    <img src="/static/images/giga-chinese-logo.png" 
+                        alt="Giga AI Logo"
+                        class="logo-image"
+                        loading="lazy">
+                    <!-- <p class="has-text-grey mt-2">Giga AI</p> -->
                   </div>
                 </div>
-                <!-- <div class="column has-text-centered">
-                  <div class="logo-placeholder-box">
-                    <i class="fas fa-brain fa-3x"></i>
-                    <p class="has-text-grey">BAAI</p>
-                  </div>
-                </div> -->
               </div>
-            </div>
 
             <div class="column has-text-centered">
               <div class="publication-links">
@@ -190,22 +204,22 @@
                   </a>
                 </span>
                 <!-- Dataset Link. -->
-                <span class="link-block">
+                <!-- <span class="link-block">
                   <a href=""
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-database"></i>
                     </span>
                     <span>Data</span>
-                  </a>
-                  <span class="link-block">
+                  </a> -->
+                  <!-- <span class="link-block">
                     <a href=""
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fas fa-database"></i>
                       </span>
                       <span>Huggingface</span>
-                    </a>
+                    </a> -->
                   <span class="link-block">
                     <a href=""
                       class="external-link button is-normal is-rounded is-dark">
@@ -222,16 +236,17 @@
     </div>
   </section>
 
+  <!--
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <video id="teaser" autoplay muted loop playsinline height="100%">
           <source src="./static/videos/teaser.mp4" type="video/mp4">
-        </video> -->
-        <!-- <div class="yush-div-center">
+        </video>
+        <div class="yush-div-center">
           <img src="./static/images/xxx.png" class="img-responsive">
-        </div> -->
-        <!-- 图片占位容器（带提示和图标） -->
+        </div>
+         图片占位容器（带提示和图标
         <div class="image-placeholder" style="background-color: #f5f5f5; border-radius: 8px; padding: 2rem; text-align: center; margin: 0 auto 2rem; max-width: 800px;">
           <div style="font-size: 3rem; color: #7a7a7a; margin-bottom: 1rem;">
             <i class="fas fa-image"></i>
@@ -250,6 +265,7 @@
       </div>
     </div>
   </section>
+  --->
 
   <section class="section" id="abstract">
     <div class="container is-max-desktop">
@@ -259,10 +275,9 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              This is abstract: palce holder palce holder palce holder palce holder
-              palce holder palce holder palce holder palce holder
-              palce holder palce holder palce holder palce holder
-              palce holder palce holder palce holder palce holder
+              Humanoid robot technology is advancing rapidly, with manufacturers introducing diverse heterogeneous visual perception modules tailored to specific scenarios. Among various perception paradigms, occupancy-based representation has become widely recognized as particularly suitable for humanoid robots, as it provides both rich semantic and 3D geometric information essential for comprehensive environmental understanding.
+
+              In this work, we present Humanoid Occupancy, a generalized multimodal occupancy perception system that integrates hardware and software components, data acquisition devices, and a dedicated annotation pipeline. Our framework employs advanced multi-modal fusion techniques to generate grid-based occupancy outputs encoding both occupancy status and semantic labels, thereby enabling holistic environmental understanding for downstream tasks such as task planning and navigation. To address the unique challenges of humanoid robots, we overcome issues such as kinematic interference and occlusion, and establish an effective sensor layout strategy. Furthermore, we have developed the first panoramic occupancy dataset specifically for humanoid robots, offering a valuable benchmark and resource for future research and development in this domain. The network architecture incorporates multi-modal feature fusion and temporal information integration to ensure robust perception. Overall, Humanoid Occupancy delivers effective environmental perception for humanoid robots and establishes a technical foundation for standardizing universal visual modules, paving the way for the widespread deployment of humanoid robots in complex real-world scenarios.
             </p>
 
           </div>
@@ -271,66 +286,173 @@
     </div>
   </section>
 
-  <section class="section" id="hardware">
+  <section class="section" id="data">
     <div class="container is-max-desktop">
       <!-- 标题部分 -->
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Hardware</h2>
+          <h2 class="title is-3">Sensor Layout and Data Acquisition</h2>
           
-          <!-- 图片占位网格 -->
-          <div class="columns is-multiline is-centered" id="hardware-images">
-            <!-- 占位图1 -->
-            <div class="column is-3">
-              <div class="image-placeholder">
-                <i class="fas fa-image fa-3x"></i>
-                <p class="placeholder-text">fig 1</p>
-                <p class="placeholder-filename">fig1.png</p>
+          <div class="columns is-centered">
+            <!-- 图片1 -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <div class="image-container">
+                <img src="./static/images/head1.png" 
+                    alt="Figure 1 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">Side View</p>
               </div>
             </div>
             
-            <!-- 占位图2 -->
-            <div class="column is-3">
-              <div class="image-placeholder">
-                <i class="fas fa-image fa-3x"></i>
-                <p class="placeholder-text">fig 1</p>
-                <p class="placeholder-filename">(fig1.png)</p>
+            <!-- 图片2 -->
+            <div class="column is-half-tablet is-one-third-desktop">
+              <div class="image-container">
+                <img src="./static/images/head2.png" 
+                    alt="Figure 2 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">Isometric View</p>
               </div>
             </div>
-            
-            <!-- 占位图3 -->
-            <div class="column is-3">
-              <div class="image-placeholder">
-                <i class="fas fa-image fa-3x"></i>
-                <p class="placeholder-text">fig 1</p>
-                <p class="placeholder-filename">(fig1.png)</p>
-              </div>
-            </div>
-            
-            <!-- 占位图4 -->
-            <div class="column is-3">
-              <div class="image-placeholder">
-                <i class="fas fa-image fa-3x"></i>
-                <p class="placeholder-text">fig 1</p>
-                <p class="placeholder-filename">(fig1.png)</p>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+              <div class="image-container">
+                <img src="./static/images/data_collection.png" 
+                    alt="Figure 2 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">Equipment and Schematic Diagram of Data Acquisition Process</p>
               </div>
             </div>
           </div>
           
           <!-- 描述文本 -->
           <div class="content has-text-justified">
-            <p>This is description about hardware setup...</p>
+            <p><strong>Sensor Layout.</strong> Our sensor consists of 6 cameras and a LiDAR.
+                The 6 cameras use standard RGB sensors, arranged in a pattern of one in the front and back and two on each side.
+                Our sensor consists of 6 cameras and a LiDAR.
+                The 6 cameras use standard RGB sensors, arranged in a way that one is arranged in the front and back, and two are arranged on each side.
+                The horizontal FOV of the camera is 118 degrees and the vertical FOV is 92 degrees.
+                The LiDAR uses a 40-line 360-degree omnidirectional LiDAR with a vertical FOV of 59 degrees.</p>
+          </div>
+
+          <div class="content has-text-justified">
+            <p><strong>Data Acquisition.</strong> we use a wearable device to collect data.
+              Our device is constructed using the same sensor configuration as that used on humanoid robots.
+              So human data collectors can wear the device directly on their heads to collect data in the environment.
+              This collection method greatly reduces our collection cost and difficulty.
+              In order to ensure that the distribution of collected data is as close as possible to the distribution of real robot data, we require the height of human data collectors to be around 160 cm.
+              This ensures that the height of the sensors worn by human collectors is almost the same as the height of the sensors finally installed on the humanoid robot.
+              To prevent the head shaking of human collectors during collection, causing the sensor to lose horizontal stability, we also added a neck stabilizer to the collection equipment.
+              We limit the walking speed of the collectors to no more than 1.2 meters per second, and require that the angular speed when turning should not be higher than 0.4 radians per second.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="performance">
+  <section class="section" id="annotation">
+    <div class="container is-max-desktop">
+      <!-- 标题部分 -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Annotation Pipeline</h2>
+          
+          <div class="columns is-centered">
+            <!-- 图片1 -->
+            <div class="column is-8-desktop">
+              <div class="image-container">
+                <img src="./static/images/generation_pipeline.png" 
+                    alt="Figure 1 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">The Occupancy Generation Pipeline</p>
+              </div>
+            </div>
+            
+            <!-- <div class="column is-half-tablet is-one-third-desktop">
+              <div class="image-container">
+                <img src="./static/images/head2.png" 
+                    alt="Figure 2 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">Isometric View</p>
+              </div>
+            </div>
+
+            <div class="column is-half-tablet is-one-third-desktop">
+              <div class="image-container">
+                <img src="./static/images/data_collection.png" 
+                    alt="Figure 2 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">Equipment and Schematic Diagram of Data Acquisition Process</p>
+              </div>
+            </div>-->
+          </div> 
+          
+          <!-- 描述文本 -->
+          <div class="content has-text-justified">
+            <p>We divide the collected data into three categories according to the scenes, namely home scenes, industrial scenes and outdoor scenes.
+              In the three different scenes, we define different point-wise semantic categories to be annotated.
+              we annotate the bounding boxes of dynamic objects, including pedestrians, cyclists and vehicles.
+              Pedestrians are non-rigid targets, and sometimes other object points are included when they are annotated using bounding boxes.
+              To solve this problem, we divide pedestrians into special posture pedestrians, that is, pedestrians that cannot be represented by bounding boxes, and ordinary posture pedestrians, that is, pedestrians that can be represented by bounding boxes.
+              We only annotate ordinary posture pedestrians with bounding boxes.
+
+              In addition to the bounding boxes of dynamic targets, we also perform point-by-point semantic annotation on the point cloud.
+              When performing semantic annotation of point clouds, we remove the dynamic targets of each clips and then superimpose the remaining static points on multiple frames of point clouds.
+              Then, point-level semantic annotation is performed by referring to the projection of the point cloud on the image.
+
+              The process of obtaining the occupancy ground truth after annotation can be referred to the above figure.
+              After obtaining the static superimposed point cloud annotation and dynamic target box, we first align the superimposed static background points to the ego coordinate system of the frame-by-frame point cloud, and then splice the superimposed dynamic foreground points into the point cloud according to the dynamic target posture of the frame.
+              The superimposed and stitched point cloud is directly voxelized to obtain the final occupancy ground truth.
+              We do not perform Poisson reconstruction on the superimposed and stitched point cloud.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container is-max-desktop">
+      <!-- 标题部分 -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Multi-Modal Fusion Network</h2>
+          
+          <div class="columns is-centered">
+            <!-- 图片1 -->
+            <div class="column">
+              <div class="image-container">
+                <img src="./static/images/arch_new.png" 
+                    alt="Figure 1 Description"
+                    class="responsive-image"
+                    loading="lazy">
+                <p class="image-caption">The Model Architecture</p>
+              </div>
+            </div>
+
+          </div> 
+          
+          <!-- 描述文本 -->
+          <div class="content has-text-justified">
+            <p>Our occupancy perception model accepts multimodal inputs, including a LiDAR point cloud and 6 pinhole camera images.
+              We use the Bird's Eye View (BEV) paradigm that has been widely validated and adopted in autonomous driving for feature extraction and feature fusion.
+              Specifically, we extract LiDAR and camera features through two modality-specific feature extraction branches, and then perform multi-modal feature fusion through Transformer Decoder.
+              The final occupancy result is predicted on the fused BEV features.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="results">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Performance</h2>
+          <h2 class="title is-3">Experiments and Results</h2>
           <p>Place holder</p>
           <br>
 

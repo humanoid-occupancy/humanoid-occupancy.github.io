@@ -328,3 +328,62 @@ body {
     padding: 0.75rem;
   }
 }
+
+/* Logo容器样式 */
+.logo-image-box {
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* Logo图片基础样式 */
+.logo-image {
+  height: 90px; /* 固定高度 */
+  width: auto;  /* 宽度自适应 */
+  /* max-width: 180px; */
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: all 0.3s ease;
+}
+
+/* 悬停效果 */
+.logo-image-box:hover .logo-image {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .logo-image {
+    height: 60px;
+    max-width: 140px;
+  }
+}
+
+/* 图片容器 */
+.image-container {
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* 响应式图片 */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+/* 图片悬停效果 */
+.responsive-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* 图片说明文字 */
+.image-caption {
+  margin-top: 0.5rem;
+  color: #333;
+  font-size: 1.0rem;
+}

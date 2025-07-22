@@ -13,11 +13,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- 预加载 -->
+  <!-- 1. 首屏关键CSS -->
   <link rel="preload" href="/static/css/bulma.min.css" as="style">
-  <link rel="preload" href="/static/js/index.js" as="script">
-  <link rel="preload" href="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/shots_video.mp4" as="video" type="video/mp4" crossorigin>
-  <link rel="preload" href="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4" as="video" type="video/mp4" crossorigin>
+  <link rel="preload" href="/static/css/index.css" as="style">
 
+  <!-- 2. 首屏关键JS -->
+  <link rel="preload" href="/static/js/index.js" as="script">
+  <link rel="preload" href="/static/js/bulma-carousel.min.js" as="script">
+
+  <link rel="preload" href="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/shots_video.mp4" 
+                      as="video" 
+                      type="video/mp4" 
+                      crossorigin>
+
+  <!-- <link rel="preload" href="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4" as="video" type="video/mp4" crossorigin> -->
+  <!-- 5. 首屏Logo图片 -->
+  <link rel="preload" href="/static/images/x-humanoid-logo.png" as="image">
+  <link rel="preload" href="/static/images/giga-logo.png" as="image">
   <script>
     window.dataLayer = window.dataLayer || [];
   </script>
@@ -50,6 +62,42 @@
 </style>
 
 </head>
+
+<script>
+// 1. 视口内图片预加载
+document.addEventListener('DOMContentLoaded', () => {
+  const lazyImages = [
+    '/static/images/head1.png',
+    '/static/images/head2.png',
+    '/static/images/data_collection.png',
+    '/static/images/generation_pipeline.png',
+    '/static/images/arch_new.png'
+  ];
+  
+  lazyImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    img.loading = 'lazy';
+  });
+});
+
+// 2. 第二段视频预加载（用户滚动到Results部分时）
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = 'https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4';
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+      observer.disconnect();
+    }
+  });
+}, {threshold: 0.1});
+
+observer.observe(document.querySelector('#results'));
+</script>
 
 <body>
 

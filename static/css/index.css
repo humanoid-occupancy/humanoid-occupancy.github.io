@@ -24,7 +24,7 @@ body {
 }
 
 .teaser {
-  font-family: 'Google Sans', sans-serif;
+  font-family: 'familyArial', sans-serif;
 }
 
 
@@ -71,11 +71,12 @@ body {
 }
 
 .publication-authors a {
-   color: hsl(204, 86%, 53%) !important;
+   color: #e5e5e5 !important;
 }
 
 .publication-authors a:hover {
     text-decoration: underline;
+   color: #fff !important;
 }
 
 .author-block {
@@ -155,7 +156,9 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
-
+.title{
+  color: #000 !important;
+}
 .yush-div-center {
   display: flex;
   align-items: center;
@@ -165,8 +168,9 @@ body {
 
 /* 导航栏背景色 */
 .navbar {
-  background-color: #bec1c5 !important;
+  background-color: #000 !important;
   margin-bottom: 10px;
+  color: #fff;
 }
 
 .navbar.is-fixed-top {
@@ -178,11 +182,14 @@ body {
 .navbar.is-fixed-top + * {
   margin-top: 40px !important;
 }
-
+.navbar-item {
+  color: #e5e5e5!important;
+}
 /* 导航项悬停效果 */
 .navbar-item:hover {
-  background-color: #74787c !important;
-  color: white !important;
+  background-color: transparent !important;
+  color: #efefef !important;
+  font-weight: bold;
 }
 
 /* 当前选中项高亮 */
@@ -205,6 +212,34 @@ body {
     left: 0;
     z-index: 1000;
   }
+}
+/* 图片容器 */
+.image-container {
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* 响应式图片 */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+/* 图片悬停效果 */
+.responsive-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* 图片说明文字 */
+.image-caption {
+  margin-top: 0.5rem;
+  color: #333;
+  font-size: 1.0rem;
 }
 
 /* 基础样式 */
@@ -248,13 +283,13 @@ body {
   margin: 2rem 0;
 }
 .logo-placeholder-box {
-  background: #f5f5f5;
+  background: #000;
   border-radius: 8px;
   padding: 1.5rem;
   transition: all 0.3s;
 }
 .logo-placeholder-box:hover {
-  background: #eee;
+  background: #222;
 }
 .logo-placeholder-box i {
   color: #7a7a7a;
@@ -329,36 +364,6 @@ body {
   }
 }
 
-/* Logo容器样式 */
-.logo-image-box {
-  padding: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-/* Logo图片基础样式 */
-.logo-image {
-  --logo-height: 110px; /* 默认值 */
-  height: var(--logo-height);
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(20%);
-  transition: all 0.3s ease;
-}
-
-/* 悬停效果 */
-.logo-image-box:hover .logo-image {
-  filter: grayscale(0%);
-  transform: scale(1.05);
-}
-
-/* 移动端适配 */
-@media screen and (max-width: 768px) {
-  .logo-image {
-    height: 60px;
-    max-width: 140px;
-  }
-}
-
 /* 图片容器 */
 .image-container {
   padding: 1rem;
@@ -404,8 +409,4 @@ body {
   width: 100%;
   max-height: 70vh;
   object-fit: cover;
-}
-
-.hero.teaser {
-  padding-top: 3rem; /* 根据导航栏高度调整 */
 }

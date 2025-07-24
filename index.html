@@ -1,532 +1,1010 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
   <meta charset="utf-8">
-  <!-- 基础SEO -->
-  <title>Humanoid Occupancy: Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots</title>
+  <title>Humanoid Occupancy | Generalized Multimodal Perception System</title>
   <meta name="description"
     content="Humanoid Occupancy: Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots">
   <meta name="keywords" content="Humanoid Robots, Occupancy Perception, Multimodal">
-  <!-- 移动端适配 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- 预加载 -->
-  <!-- 1. 首屏关键CSS -->
   <link rel="preload" href="/static/css/bulma.min.css" as="style">
-  <link rel="preload" href="/static/css/index.css" as="style">
-
-  <!-- 2. 首屏关键JS -->
   <link rel="preload" href="/static/js/index.js" as="script">
-  <link rel="preload" href="/static/js/bulma-carousel.min.js" as="script">
 
-  <link rel="preload" href="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/shots_video.mp4" 
-                      as="video" 
-                      type="video/mp4" 
-                      crossorigin>
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- <link rel="preload" href="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4" as="video" type="video/mp4" crossorigin> -->
-  <!-- 5. 首屏Logo图片 -->
-  <link rel="preload" href="/static/images/x-humanoid-logo.png" as="image">
-  <link rel="preload" href="/static/images/giga-logo.png" as="image">
-  <script>
-    window.dataLayer = window.dataLayer || [];
-  </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-  <!-- <link href="./static/css/googlecss.css"
-        rel="stylesheet"> -->
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="./static/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/robot.png">
-
-  <script src="./static/js/jquerymin351.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    .author-block {
-        display: none;
+    :root {
+      --bg-primary: #000;
+      --bg-secondary: #000;
+      --bg-card: #fff;
+      --text-primary: #ffffff;
+      --text-secondary: #336db8;
+      --text-secondary-black: #000;
+      --accent-color: #0066ff;
+      --accent-secondary: #00d0ff;
+      --border-color: #2d3748;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    .publication-authors:hover .author-block {
-        display: block;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-</style>
 
+    body {
+      font-family: sans-serif, Arial;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 网格背景 */
+    .grid-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 标题样式 */
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+      border-radius: 3px;
+    }
+
+    /* 内容区块 */
+    section {
+      padding: 6rem 0 0 0;
+      position: relative;
+    }
+
+    /* 首页样式 */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, rgba(10, 15, 26, 0.9) 0%, rgba(10, 15, 26, 1) 70%);
+      /* 添加背景图片和初始缩放 */
+      background-image: url(./static/images/Logo-closeup-le.png);
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-size 0.1s ease-out;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* 移除背景图片相关属性 */
+      z-index: 1;
+    }
+
+    /* 在<style>标签内添加 */
+    #home::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 50px;
+      height: 200%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(0, 208, 255, 0.2),
+          transparent);
+      transform: rotate(30deg);
+      animation: sweep 4s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes sweep {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 200%;
+      }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .publication-title {
+      font-size: 2.8rem;
+      margin-bottom: 0.7rem;
+      line-height: 1.1;
+      background: linear-gradient(90deg, #ffffff, #a0aec0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: sans-serif;
+    }
+
+    /* 机构信息 */
+    .institution-info {
+      font-size: 2.1rem;
+      color: var(--text-secondary);
+      margin: 1.5rem 0;
+      line-height: 1.3;
+    }
+
+    /* Logo区域 */
+    .logo-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 40px;
+    }
+
+    .logo-box {
+      /* display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 1rem;
+      flex: 1; */
+    }
+
+    .logo-image {
+      width: auto;
+      max-width: 100%;
+      /* filter: brightness(0) invert(1); */
+      /* opacity: 0.9; */
+    }
+
+    /* 按钮样式 */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.6rem 2.2rem;
+      background: transparent;
+      border: 1px solid var(--accent-color);
+      color: var(--text-primary);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 30px;
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+      z-index: -1;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+    }
+
+    .btn:hover:before {
+      opacity: 1;
+    }
+
+    .btn i {
+      margin-right: 0.5rem;
+    }
+
+    /* 卡片样式 */
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-content {
+      padding: 2.5rem;
+    }
+
+    /* 图片样式 */
+    .responsive-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .image-container {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .image-caption {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    /* 视频容器 */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      /* 16:9 Aspect Ratio */
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      margin: 2rem 0;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 内容区域 */
+    .content {
+      color: var(--text-secondary-black);
+      line-height: 1.8;
+    }
+
+    .content p {
+      /* margin-bottom: 1.5rem; */
+    }
+
+    .content strong {
+      color: var(--text-primary);
+    }
+
+    /* 网格布局 */
+    .columns {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -15px;
+    }
+
+    .column {
+      padding: 15px;
+    }
+
+    .is-1 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    .is-4 {
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+    }
+
+    .is-8 {
+      flex: 0 0 66.6667%;
+      max-width: 66.6667%;
+    }
+
+    .is-10 {
+      flex: 0 0 83.3333%;
+      max-width: 83.3333%;
+    }
+
+    .is-12 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    /* BibTeX样式 */
+    pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 1.5rem 0;
+    }
+
+    /* 页脚 */
+    footer {
+      background: var(--bg-secondary);
+      padding: 4rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+
+    .f42 {
+      font-size: 86px;
+      line-height: 1.4;
+    }
+
+    .f32 {
+      font-size: 50px;
+      line-height: 1.4;
+    }
+
+    .h16 {
+      height: 36px;
+    }
+
+    .h24 {
+      height: 44px;
+      margin-top: 4px;
+    }
+
+
+    /* 在<style>标签内添加 */
+    .parallax-element {
+      transition: transform 0.1s ease-out;
+    }
+
+    /* 为卡片添加悬停发光效果 */
+    .card {
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg,
+          rgba(0, 102, 255, 0.1),
+          rgba(0, 208, 255, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      border-radius: 12px;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+
+    @media (max-width: 1450px) {
+
+
+      .institution-info {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        margin: 1.5rem 0;
+        line-height: 1.8;
+      }
+
+      .publication-title {
+        font-size: 2.2rem;
+      }
+
+      .h16 {
+        height: 16px;
+      }
+
+      .h24 {
+        height: 24px;
+        margin-top: 4px;
+      }
+
+      .f42 {
+        font-size: 42px;
+        line-height: 1;
+      }
+
+      .f32 {
+        font-size: 32px;
+        line-height: 1.4;
+      }
+
+
+
+      .logo-container {
+        margin: 0;
+      }
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 992px) {
+      .publication-title {
+        font-size: 2.2rem;
+      }
+
+      .is-4,
+      .is-8,
+      .is-10 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      .logo-container {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .publication-title {
+        font-size: 1.8rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      .card-content {
+        padding: 1.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .publication-title {
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.8rem;
+      }
+
+      .logo-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .logo-image {}
+    }
+  </style>
 </head>
 
-<script>
-// 1. 视口内图片预加载
-document.addEventListener('DOMContentLoaded', () => {
-  const lazyImages = [
-    '/static/images/head1.png',
-    '/static/images/head2.png',
-    '/static/images/data_collection.png',
-    '/static/images/generation_pipeline.png',
-    '/static/images/arch_new.png'
-  ];
-  
-  lazyImages.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.loading = 'lazy';
-  });
-});
-
-// 2. 第二段视频预加载（用户滚动到Results部分时）
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = 'https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4';
-      link.crossOrigin = 'anonymous';
-      document.head.appendChild(link);
-      observer.disconnect();
-    }
-  });
-}, {threshold: 0.1});
-
-observer.observe(document.querySelector('#results'));
-</script>
-
 <body>
+  <!-- 科技感网格背景 -->
+  <div class="grid-pattern"></div>
 
- <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <!-- 网站Logo/名称 -->
-      <a class="navbar-item" href="https://x-humanoid.com">
-        <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-robot"></i>
-          </span>
-          <span>X-Humanoid</span>
-        </span>
-      </a>
-
-      <!-- 移动端菜单按钮 -->
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <div id="navbarBasic" class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" href="#home">
-          <span class="icon">
-            <i class="fas fa-home"></i>
-          </span>
-          <span>Home</span>
-        </a>
-
-        <a class="navbar-item" href="#abstract">
-          <span class="icon">
-            <i class="fas fa-scroll"></i>
-          </span>
-          <span>Abstract</span>
-        </a>
-
-        <a class="navbar-item" href="#data">
-          <span class="icon">
-            <i class="fas fa-server"></i>
-          </span>
-          <span>Data</span>
-        </a>
-
-        <!-- 数据分析 -->
-        <a class="navbar-item" href="#annotation">
-          <span class="icon">
-            <i class="fas fa-cubes"></i>
-          </span>
-          <span>Annotation</span>
-        </a>
-
-        <a class="navbar-item" href="#method">
-          <span class="icon">
-            <i class="fas fa-project-diagram"></i>
-          </span>
-          <span>Method</span>
-        </a>
-
-        <a class="navbar-item" href="#results">
-          <span class="icon">
-            <i class="fas fa-chart-line"></i>
-          </span>
-          <span>Results</span>
-        </a>
-
-        <!-- 引用 -->
-        <a class="navbar-item" href="#bibtex">
-          <span class="icon">
-            <i class="fas fa-quote-right"></i>
-          </span>
-          <span>Citation</span>
-        </a>
-      </div>
-    </div>
-  </nav>
-
-  <section class="hero teaser">
-    <div class="container is-max-desktop">
-      <div class="hero-body">
-        <div class="video-container has-rounded-corners">
-          <video id="teaser" autoplay muted loop playsinline>
-            <source src="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/shots_video.mp4" type="video/mp4">
-          </video>
+  <!-- 首页 -->
+  <section id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="publication-title f42">Humanoid Occupancy</h1>
+        <h1 class="publication-title f32">
+          Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots
+        </h1>
+        <div class="institution-info">
+          <div style="margin-bottom: 10px;">Humanoid Occupancy Team</div>
+          <sup>1</sup>Beijing Innovation Center of Humanoid Robotics<br>
+          <sup>2</sup>Giga AI
         </div>
-        <h2 class="subtitle has-text-centered mt-5">
-          We present a multimodal occupancy perception system tailored for humanoid robots, encompassing the complete hardware and software stack, including sensor configurations, data acquisition, data annotation, and perception networks.
-        </h2>
-      </div>
-    </div>
-  </section>
 
-  <section class="hero" id="home">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Humanoid Occupancy: Enabling A Generalized Multimodal Occupancy Perception System on Humanoid Robots</h1>
-            
-            <div class="is-size-5 publication-authors">
-              <!-- 直接显示完整作者列表（不再隐藏） -->
-              <div class="author-list">
-                Wei Cui<sup>*1</sup>, Haoyu Wang<sup>*2</sup>, Wenkang Qin<sup>2</sup>,
-                Yijie Guo<sup>1</sup>, Gang Han<sup>1</sup>, Wen Zhao<sup>1</sup>, 
-                Jiahang Cao<sup>1</sup>, Zhang Zhang<sup>1</sup>, Jiaru Zhong<sup>1</sup>,
-                Jingkai Sun<sup>1</sup>, Pihai Sun<sup>1</sup>, Shuai Shi<sup>1</sup>,
-                Botuo Jiang<sup>1</sup>, Zhichao Liu<sup>2</sup>, Yang Wang<sup>2</sup>,
-                Zheng Zhu<sup>2</sup>,<br> Guan Huang<sup>2</sup>, Qiang Zhang<sup>†Δ1</sup>,
-                and Jian Tang<sup>1</sup>                
-              </div>
-
-              <!-- 作者身份说明 -->
-              <div class="is-size-6 publication-authors">
-                <span>
-                  <sup>*</sup>&nbsp;Equal Contributors,&nbsp;
-                  <sup>†</sup>&nbsp;Corresponding Author,&nbsp;
-                  <sup>Δ</sup>&nbsp;Project and Technical Leader
-                </span>
-                <br>
-                <!-- 机构信息 -->
-                <div class="institution-info">
-                  <sup>1</sup>&nbsp;X-Humanoid &nbsp;&nbsp;
-                  <sup>2</sup>&nbsp;GigaAI<br>
-                </div>
-              </div>
-              
-              <!-- 机构Logo -->
-              <div class="columns is-centered">
-                <!-- 第一个Logo -->
-                <div class="column has-text-centered">
-                  <div class="logo-image-box">
-                    <img src="/static/images/x-humanoid-logo.png" 
-                        alt="X-Humanoid Logo"
-                        class="logo-image"
-                        style="--logo-height: 110px"
-                        loading="lazy">
-                  </div>
-                </div>
-
-                <!-- 第二个Logo -->
-                <div class="column has-text-centered">
-                  <div class="logo-image-box">
-                    <img src="/static/images/giga-logo.png" 
-                        alt="Giga AI Logo"
-                        class="logo-image"
-                        style="--logo-height: 95px"
-                        loading="lazy">
-                    <!-- <p class="has-text-grey mt-2">Giga AI</p> -->
-                  </div>
-                </div>
-              </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <!-- PDF Link. -->
-                <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="mailto:jony.zhang@x-humanoid.com"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                    <span>Email</span>
-                  </a>
-                </span>
-                  <!-- <span class="link-block">
-                    <a href=""
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-database"></i>
-                      </span>
-                      <span>Huggingface</span>
-                    </a> -->
-                  <!-- <span class="link-block">
-                    <a href=""
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                      <span>Github</span>
-                    </a> -->
-              </div>
+        <div class="logo-container" style="align-items: center;">
+          <div class="logo-box column has-text-centered">
+            <div class="logo-image-box">
+              <img src="/static/images/x-humanoid-logo.png" alt="X-Humanoid Logo" class="logo-image h16" loading="lazy">
+            </div>
+          </div>
+          <div class="logo-box column has-text-centered" style="margin-left: 24px;">
+            <div class="logo-image-box">
+              <img src="/static/images/giga-logo.png" alt="Giga AI Logo" class="logo-image h24" loading="lazy">
             </div>
           </div>
         </div>
+
+        <div class="btn-container">
+          <a href="#" class="btn">
+            <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+             Paper
+          </a>
+
+          <a href="mailto:jony.zhang@x-humanoid.com" class="btn">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span>Email</span>
+          </a>
+
+        </div>
       </div>
     </div>
   </section>
 
-
-  <section class="section" id="abstract">
-    <div class="container is-max-desktop">
-      <!-- Abstract. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Humanoid robot technology is advancing rapidly, with manufacturers introducing diverse heterogeneous visual perception modules tailored to specific scenarios. Among various perception paradigms, occupancy-based representation has become widely recognized as particularly suitable for humanoid robots, as it provides both rich semantic and 3D geometric information essential for comprehensive environmental understanding.
-
-              In this work, we present Humanoid Occupancy, a generalized multimodal occupancy perception system that integrates hardware and software components, data acquisition devices, and a dedicated annotation pipeline. Our framework employs advanced multi-modal fusion techniques to generate grid-based occupancy outputs encoding both occupancy status and semantic labels, thereby enabling holistic environmental understanding for downstream tasks such as task planning and navigation. To address the unique challenges of humanoid robots, we overcome issues such as kinematic interference and occlusion, and establish an effective sensor layout strategy. Furthermore, we have developed the first panoramic occupancy dataset specifically for humanoid robots, offering a valuable benchmark and resource for future research and development in this domain. The network architecture incorporates multi-modal feature fusion and temporal information integration to ensure robust perception. Overall, Humanoid Occupancy delivers effective environmental perception for humanoid robots and establishes a technical foundation for standardizing universal visual modules, paving the way for the widespread deployment of humanoid robots in complex real-world scenarios.
+  <!-- 视频介绍 -->
+  <section id="abstract" data-parallax="scroll" data-speed="0.5" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="column is-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="video-container">
+              <video id="teaser" muted autoplay loop playsinline controls>
+                <source
+                  src="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/shots_video.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+            <p class="content has-text-centered" style="font-size: 18px;">
+              We present a multimodal occupancy perception system tailored for humanoid robots, encompassing the
+              complete hardware and software stack, including sensor configurations, data acquisition, data annotation,
+              and perception networks.
             </p>
-
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="data">
-    <div class="container is-max-desktop">
-      <!-- 标题部分 -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Sensor Layout and Data Acquisition</h2>
-          
-          <div class="columns is-centered">
-            <!-- 图片1 -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="image-container">
-                <img src="./static/images/head2.png" 
-                    alt="Figure 1 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">Side View</p>
-              </div>
-            </div>
-            
-            <!-- 图片2 -->
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="image-container">
-                <img src="./static/images/head1.png" 
-                    alt="Figure 2 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">Isometric View</p>
-              </div>
-            </div>
+  <!-- 摘要 -->
+  <section>
+    <div class="container">
+      <h2 class="title is-2 has-text-centered section-title">Abstract</h2>
 
-            <div class="column is-half-tablet is-one-third-desktop">
-              <div class="image-container">
-                <img src="./static/images/data_collection.png" 
-                    alt="Figure 2 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">Equipment and Schematic Diagram of Data Acquisition Process</p>
-              </div>
+      <div class="column is-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <p>
+                Humanoid robot technology is advancing rapidly, with manufacturers introducing diverse heterogeneous visual perception modules tailored to specific scenarios. Among various perception paradigms, occupancy-based representation has become widely recognized as particularly suitable for humanoid robots, as it provides both rich semantic and 3D geometric information essential for comprehensive environmental understanding.
+
+                In this work, we present Humanoid Occupancy, a generalized multimodal occupancy perception system that integrates hardware and software components, data acquisition devices, and a dedicated annotation pipeline. Our framework employs advanced multi-modal fusion techniques to generate grid-based occupancy outputs encoding both occupancy status and semantic labels, thereby enabling holistic environmental understanding for downstream tasks such as task planning and navigation. To address the unique challenges of humanoid robots, we overcome issues such as kinematic interference and occlusion, and establish an effective sensor layout strategy. Furthermore, we have developed the first panoramic occupancy dataset specifically for humanoid robots, offering a valuable benchmark and resource for future research and development in this domain. The network architecture incorporates multi-modal feature fusion and temporal information integration to ensure robust perception. Overall, Humanoid Occupancy delivers effective environmental perception for humanoid robots and establishes a technical foundation for standardizing universal visual modules, paving the way for the widespread deployment of humanoid robots in complex real-world scenarios.
+              </p>
             </div>
           </div>
-          
-          <!-- 描述文本 -->
-          <div class="content has-text-justified">
-            <p><strong>Sensor Layout.</strong>
-                Our sensor consists of 6 cameras and a LiDAR.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 传感器布局 -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="title is-2 has-text-centered section-title">Sensor Layout and Data Acquisition</h2>
+
+      <div class="columns">
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-content">
+              <div class="image-container">
+                <img src="./static/images/head2.png" alt="Side View" class="responsive-image">
+              </div>
+              <p class="image-caption" style="padding-bottom: 24px;">Side View</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-content">
+              <div class="image-container">
+                <img src="./static/images/head1.png" alt="Isometric View" class="responsive-image">
+              </div>
+              <p class="image-caption" style="padding-bottom: 24px;">Isometric View</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-content">
+              <div class="image-container">
+                <img src="./static/images/data_collection.png" alt="Data Collection" class="responsive-image">
+              </div>
+              <p class="image-caption" style="padding-bottom: 24px;">Data Acquisition</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-container">
+        <div class="content card" style="padding:2.5rem;">
+          <p>
+
+            <span style="color:#000;font-weight: bold;font-size: 20px;">
+              Sensor Layout.
+            </span>
+            Our sensor consists of 6 cameras and a LiDAR.
                 The 6 cameras use standard RGB sensors, arranged in a way that one is arranged in the front and back, and two are arranged on each side.
                 The horizontal FOV of the camera is 118 degrees and the vertical FOV is 92 degrees.
-                The LiDAR uses a 40-line 360-degree omnidirectional LiDAR with a vertical FOV of 59 degrees.</p>
-          </div>
+                The LiDAR uses a 40-line 360-degree omnidirectional LiDAR with a vertical FOV of 59 degrees.
+          </p>
 
-          <div class="content has-text-justified">
-            <p><strong>Data Acquisition.</strong> 
-              We use a wearable device with the same sensor configuration as humanoid robots to collect data. Human data collectors around 160 cm tall wear it directly on their heads to ensure the sensor height matches that of the final installation on the robot, a neck stabilizer is added to prevent head shaking during collection, and the collectors’ walking speed is limited to no more than 1.2 meters per second with turning angular speed not exceeding 0.4 radians per second.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="annotation">
-    <div class="container is-max-desktop">
-      <!-- 标题部分 -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Annotation Pipeline</h2>
-          
-          <div class="columns is-centered">
-            <!-- 图片1 -->
-            <div class="column is-8-desktop">
-              <div class="image-container">
-                <img src="./static/images/generation_pipeline.png" 
-                    alt="Figure 1 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">The Occupancy Generation Pipeline</p>
-              </div>
-            </div>
-          </div> 
-          
-          <!-- 描述文本 -->
-          <div class="content has-text-justified">
-            <p>Collected data is divided into home, industrial, and outdoor scenes, with different point-wise semantic categories defined for annotation in each. Bounding boxes are annotated for dynamic objects (pedestrians, cyclists, vehicles); pedestrians are categorized into special-posture and ordinary-posture, with only the latter annotated with bounding boxes. Besides dynamic object bounding boxes, point-by-point semantic annotation is done on point clouds: dynamic objects in each clip are removed, remaining static points are superimposed onto multi-frame point clouds, and point-level semantic annotation is performed by referring to the point cloud’s projection on images. For obtaining occupancy ground truth after annotation, superimposed static background points are aligned to the ego coordinate system of frame-by-frame point clouds, superimposed dynamic foreground points are spliced into the point cloud based on the frame’s dynamic object poses, and the superimposed and spliced point cloud is directly voxelized to get the final occupancy ground truth without Poisson reconstruction.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="method">
-    <div class="container is-max-desktop">
-      <!-- 标题部分 -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Multi-Modal Fusion Network</h2>
-          
-          <div class="columns is-centered">
-            <!-- 图片1 -->
-            <div class="column">
-              <div class="image-container">
-                <img src="./static/images/arch_new.png" 
-                    alt="Figure 1 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">The Model Architecture</p>
-              </div>
-            </div>
-
-          </div> 
-          
-          <!-- 描述文本 -->
-          <div class="content has-text-justified">
-            <p>Our occupancy perception model accepts multimodal inputs, including a LiDAR point cloud and 6 pinhole camera images.
-              We use the Bird's Eye View (BEV) paradigm that has been widely validated and adopted in autonomous driving for feature extraction and feature fusion.
-              Since the robotic sensors undergo pitch and roll motions during movement, it is essential to transform the sensor data into a gravity-aligned egocentric reference frame to comply with the BEV assumption.
-              Specifically, we extract LiDAR and camera features through two modality-specific feature extraction branches, and then perform multi-modal feature fusion through Transformer Decoder.
-              The final occupancy result is predicted on the fused BEV features.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="results">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <!-- 标题和描述 -->
-          <h2 class="title is-3">Experiments and Results</h2>
-          <p>Experiments are conducted on our collected data, including 180 training clips and 20 validation clips. Metrics used for evaluation are mIoU and rayIoU. The perception range is set as [-10m, 10m] for the X and Y axes, and [-1.5m, 0.9m] for the Z-axis in the ego coordinate system. The output occupancy prediction size is 200×200×24 voxels.</p>
-          <br>
-          
-          <h3 class="title is-4">Benchmark</h3>
-          <div class="columns is-centered">
-            <!-- 图片1 -->
-            <div class="column is-half-tablet is-half-desktop">
-              <div class="image-container">
-                <img src="./static/images/humanoid_occ_mIOU.png" 
-                    alt="Figure 1 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">mIoU Performance</p>
-              </div>
-            </div>
-            
-            <!-- 图片2 -->
-            <div class="column is-half-tablet is-half-desktop">
-              <div class="image-container">
-                <img src="./static/images/humanoid_occ_rayIOU.png" 
-                    alt="Figure 2 Description"
-                    class="responsive-image"
-                    loading="lazy">
-                <p class="image-caption">rayIoU Performance</p>
-              </div>
-            </div>
-          </div>
-          <div class="content has-text-justified">
-            <p>We benchmark our method against representative BEV perception models on our multi-modal dataset. All models adopt identical training configurations, including input image resolution, backbone network, feature dimensions, and training strategies. Our model achieves superior metrics while maintaining lightweight architecture with significantly fewer parameters.</p>
-          </div>
-
-          <h3 class="title is-4">Visualization Result</h3>
-          <video poster="" id="" autoplay="" controls="" muted="" loop="" height="100%" playbackrate="2.0" style="border-radius: 5px;">
-            <source src="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4" type="video/mp4">
-          </video>
-
-          <!-- 底部链接 -->
-          <br>
-          <br>
           <p>
-            For more details on data analysis and experiment results, 
-            please refer to our <a href="">paper</a>.
+            <span style="color:#000;font-weight:bold;font-size: 20px;">
+              Data Acquisition.
+            </span>
+            We use a wearable device with the same sensor configuration as humanoid robots to collect data. Human data
+            collectors around 160 cm tall wear it directly on their heads to ensure the sensor height matches that of
+            the final installation on the robot, a neck stabilizer is added to prevent head shaking during collection,
+            and the collectors' walking speed is limited to no more than 1.2 meters per second with turning angular
+            speed not exceeding 0.4 radians per second.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-
-
-  <section class="section" id="bibtex">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>place holder
-      </code></pre>
-    </div>
-    <br>
-  </section>
-  </section>
-
-  <footer class="footer">
+  <!-- 标注流程 -->
+  <section>
     <div class="container">
-      <div class="content has-text-centered">
-        <a class="icon-link" href="">
-          <i class="fas fa-file-pdf"></i>
-        </a>
-        <!-- <a class="icon-link" href="" class="external-link" disabled>
-          <i class="fab fa-github"></i>
-        </a> -->
-      </div>
-      <!-- <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content has-text-centered">
-            <p>
-              The website template was borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>
-              and <a href="https://eureka-research.github.io/">Eureka</a>.
-            </p>
+      <h2 class="title is-2 has-text-centered section-title">Annotation Pipeline</h2>
+
+      <div class="column is-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="image-container">
+              <img src="./static/images/generation_pipeline.png" alt="Annotation Pipeline" class="responsive-image">
+            </div>
+            <p class="image-caption">The Occupancy Generation Pipeline</p>
+
+            <div class="content" style="margin-top: 40px;">
+              <p>
+                Collected data is divided into home, industrial, and outdoor scenes, with different point-wise semantic
+                categories defined for annotation in each. Bounding boxes are annotated for dynamic objects
+                (pedestrians, cyclists, vehicles); pedestrians are categorized into special-posture and
+                ordinary-posture, with only the latter annotated with bounding boxes. Besides dynamic object bounding
+                boxes, point-by-point semantic annotation is done on point clouds: dynamic objects in each clip are
+                removed, remaining static points are superimposed onto multi-frame point clouds, and point-level
+                semantic annotation is performed by referring to the point cloud’s projection on images. For obtaining
+                occupancy ground truth after annotation, superimposed static background points are aligned to the ego
+                coordinate system of frame-by-frame point clouds, superimposed dynamic foreground points are spliced
+                into the point cloud based on the frame’s dynamic object poses, and the superimposed and spliced point
+                cloud is directly voxelized to get the final occupancy ground truth without Poisson reconstruction.
+              </p>
+            </div>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
-  </footer>
+  </section>
 
+  <!-- 模型架构 -->
+  <section style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="title is-2 has-text-centered section-title">Multi-Modal Fusion Network</h2>
+
+      <div class="column is-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="image-container">
+              <img src="./static/images/arch_new.png" alt="Model Architecture" class="responsive-image">
+            </div>
+            <p class="image-caption">The Model Architecture</p>
+
+            <div class="content" style="margin-top: 40px;">
+              <p>
+                Our occupancy perception model accepts multimodal inputs, including a LiDAR point cloud and 6 pinhole
+                camera images. We use the Bird's Eye View (BEV) paradigm that has been widely validated and adopted in
+                autonomous driving for feature extraction and feature fusion. Since the robotic sensors undergo pitch
+                and roll motions during movement, it is essential to transform the sensor data into a gravity-aligned
+                egocentric reference frame to comply with the BEV assumption. Specifically, we extract LiDAR and camera
+                features through two modality-specific feature extraction branches, and then perform multi-modal feature
+                fusion through Transformer Decoder. The final occupancy result is predicted on the fused BEV features.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 实验结果 -->
+  <section>
+    <div class="container">
+      <h2 class="title is-2 has-text-centered section-title">Experiments and Results</h2>
+      <div class="column is-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <p>Experiments are conducted on our collected data, including 180 training clips and 20 validation clips.
+                Metrics used for evaluation are mIoU and rayIoU. The perception range is set as [-10m, 10m] for the X
+                and
+                Y axes, and [-1.5m, 0.9m] for the Z-axis in the ego coordinate system. The output occupancy prediction
+                size is 200×200×24 voxels.</p>
+            </div>
+            <h3 class="title is-4 has-text-centered" style="margin-top: 1.5rem;color:#000">Benchmark</h3>
+            <div class="columns is-centered">
+              <div class="column is-1">
+                <div class="card" style="border: 1px solid #fff;">
+                  <div class="card-content">
+                    <div class="image-container">
+                      <img src="./static/images/humanoid_occ_mIOU.png" alt="Figure 1 Description"
+                        class="responsive-image" loading="lazy">
+                    </div>
+                    <p class="image-caption">mIoU Performance</p>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-1">
+                <div class="card" style="border: 1px solid #fff;">
+                  <div class="card-content">
+                    <div class="image-container">
+                      <img src="./static/images/humanoid_occ_rayIOU.png" alt="Figure 2 Description"
+                        class="responsive-image" loading="lazy">
+                    </div>
+                    <p class="image-caption">rayIoU Performance</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content" style="margin-top: 1rem;">
+              <p>We benchmark our method against representative BEV perception models on our multi-modal dataset. All
+                models adopt identical training configurations, including input image resolution, backbone network,
+                feature dimensions, and training strategies. Our model achieves superior metrics while maintaining
+                lightweight architecture with significantly fewer parameters.
+              </p>
+            </div>
+            <h3 class="title is-4 has-text-centered" style="margin-top: 1.5rem;color:#000">Visualization Result</h3>
+            <div class="video-container" style="margin:1rem 0;">
+              <video poster="" id="result-video" autoplay muted loop playsinline controls height="100%" playbackrate="2.0">
+                <source
+                  src="https://media.githubusercontent.com/media/humanoid-occupancy/humanoid-occupancy.github.io/main/static/videos/result1.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+            <div class="content has-text-centered" style="margin-top: 2rem;">
+              <p>
+                For more details on data analysis and experiment results, please refer to our paper.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTeX -->
+  <section style="background: var(--bg-secondary);padding-bottom: 6rem;">
+    <div class="container">
+      <h2 class="title is-2 has-text-centered section-title">BibTeX</h2>
+
+      <div class="column is-12">
+        <div class="card">
+          <div class="card-content">
+            <pre>place holder</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 
 </html>
+<script>
+  window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY;
+    const homeSection = document.getElementById('home');
+    const maxScroll = window.innerHeight; // 一屏高度为最大滚动范围
+    
+    // 计算缩放比例 (1 到 1.5 倍之间)
+    const scale = 1 + (scrollPosition / maxScroll) * 0.5;
+    
+    // 应用缩放效果到背景
+    homeSection.style.backgroundSize = `${scale * 100}%`;
+  });
+</script>
+   
+<script>
+  // 元素进入视口时的动画（支持重复触发，带防抖处理）
+  document.addEventListener('DOMContentLoaded', function () {
+    // 创建 Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 元素进入视口时添加动画类
+          entry.target.classList.add('animate-in');
+        } else {
+          // 元素离开视口时移除动画类，以便下次进入时重新触发动画
+          entry.target.classList.remove('animate-in');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // 观察所有卡片和标题
+    document.querySelectorAll('.card, .section-title, .content').forEach(el => {
+      observer.observe(el);
+    });
+  });
+
+  // 添加CSS动画类（增强版）
+  const style = document.createElement('style');
+  style.textContent = `
+    .card, .section-title, .content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section-title {
+      transition-delay: 0.1s;
+    }
+    
+    .card {
+      transition-delay: 0.2s;
+    }
+    
+    .content {
+      transition-delay: 0.3s;
+    }
+    
+    /* 确保动画可以重复触发 */
+    .section-title:not(.animate-in),
+    .card:not(.animate-in),
+    .content:not(.animate-in) {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+<script>
+  // 添加鼠标交互粒子效果
+  document.addEventListener('DOMContentLoaded', function () {
+    const particlesContainer = document.createElement('div');
+    particlesContainer.id = 'particles';
+    particlesContainer.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    `;
+    document.body.appendChild(particlesContainer);
+
+    document.addEventListener('mousemove', function (e) {
+      if (Math.random() > 0.3) return; // 只有30%概率生成粒子
+
+      const particle = document.createElement('div');
+      particle.style.cssText = `
+        position: fixed;
+        top: ${e.clientY}px;
+        left: ${e.clientX}px;
+        width: 4px;
+        height: 4px;
+        background: rgba(0, 102, 255, 0.7);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+      `;
+
+      particlesContainer.appendChild(particle);
+
+      // 添加动画
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 30 + Math.random() * 70;
+      const duration = 0.5 + Math.random() * 1;
+
+      particle.animate([
+        {
+          transform: 'translate(0, 0) scale(1)',
+          opacity: 1
+        },
+        {
+          transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+          opacity: 0
+        }
+      ], {
+        duration: duration * 1000,
+        easing: 'cubic-bezier(0, 0.9, 0.57, 1)'
+      });
+
+      // 动画结束后移除粒子
+      setTimeout(() => {
+        particle.remove();
+      }, duration * 1000);
+    });
+  });
+</script>

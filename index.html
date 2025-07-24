@@ -576,7 +576,7 @@
         </h1>
         <div class="institution-info">
           <div style="margin-bottom: 10px;">Humanoid Occupancy Team</div>
-          <sup>1</sup>Beijing Innovation Center of Humanoid Robotics<br>
+          <sup>1</sup>X-Humanoid<br>
           <sup>2</sup>Giga AI
         </div>
 
@@ -588,7 +588,7 @@
           </div>
           <div class="logo-box column has-text-centered" style="margin-left: 24px;">
             <div class="logo-image-box">
-              <img src="/static/images/giga-logo.png" alt="Giga AI Logo" class="logo-image h24" loading="lazy">
+              <img src="/static/images/giga-logo-2.png" alt="Giga AI Logo" class="logo-image h24" loading="lazy">
             </div>
           </div>
         </div>
@@ -715,11 +715,7 @@
             <span style="color:#000;font-weight:bold;font-size: 20px;">
               Data Acquisition.
             </span>
-            We use a wearable device with the same sensor configuration as humanoid robots to collect data. Human data
-            collectors around 160 cm tall wear it directly on their heads to ensure the sensor height matches that of
-            the final installation on the robot, a neck stabilizer is added to prevent head shaking during collection,
-            and the collectors' walking speed is limited to no more than 1.2 meters per second with turning angular
-            speed not exceeding 0.4 radians per second.
+            We use a wearable device with the same sensor configuration as humanoid robots to collect data. Human data collectors around 160 cm tall wear it directly on their heads to ensure the sensor height matches that of the final installation on the robot. A neck stabilizer is added to prevent head shaking during collection, and the collectors' walking speed is limited to no more than 1.2 meters per second with turning angular speed not exceeding 0.4 radians per second.
           </p>
         </div>
       </div>
@@ -741,17 +737,7 @@
 
             <div class="content" style="margin-top: 40px;">
               <p>
-                Collected data is divided into home, industrial, and outdoor scenes, with different point-wise semantic
-                categories defined for annotation in each. Bounding boxes are annotated for dynamic objects
-                (pedestrians, cyclists, vehicles); pedestrians are categorized into special-posture and
-                ordinary-posture, with only the latter annotated with bounding boxes. Besides dynamic object bounding
-                boxes, point-by-point semantic annotation is done on point clouds: dynamic objects in each clip are
-                removed, remaining static points are superimposed onto multi-frame point clouds, and point-level
-                semantic annotation is performed by referring to the point cloud’s projection on images. For obtaining
-                occupancy ground truth after annotation, superimposed static background points are aligned to the ego
-                coordinate system of frame-by-frame point clouds, superimposed dynamic foreground points are spliced
-                into the point cloud based on the frame’s dynamic object poses, and the superimposed and spliced point
-                cloud is directly voxelized to get the final occupancy ground truth without Poisson reconstruction.
+                The annotation process is divided into three parts. First, static and dynamic objects are processed separately. Dynamic objects are directly annotated with bounding boxes. For static object processing, we first remove the point clouds of dynamic objects, then remaining static points are superimposed onto multi-frame point clouds, and point-level semantic annotation is performed. Finally, the dynamic and static scenes along with their annotations are merged: the superimposed static background points are aligned to the ego coordinate system of frame-by-frame point clouds, while the dynamic foreground points are spliced into the point cloud based on the poses of dynamic objects in each frame. This merged point cloud is directly voxelized to obtain the ground truth without Poisson reconstruction.
               </p>
             </div>
           </div>
@@ -801,8 +787,7 @@
               <p>Experiments are conducted on our collected data, including 180 training clips and 20 validation clips.
                 Metrics used for evaluation are mIoU and rayIoU. The perception range is set as [-10m, 10m] for the X
                 and
-                Y axes, and [-1.5m, 0.9m] for the Z-axis in the ego coordinate system. The output occupancy prediction
-                size is 200×200×24 voxels.</p>
+                Y axes, and [-1.5m, 0.9m] for the Z-axis in the ego coordinate system.</p>
             </div>
             <h3 class="title is-4 has-text-centered" style="margin-top: 1.5rem;color:#000">Benchmark</h3>
             <div class="columns is-centered">
@@ -831,8 +816,7 @@
             </div>
             <div class="content" style="margin-top: 1rem;">
               <p>We benchmark our method against representative BEV perception models on our multi-modal dataset. All
-                models adopt identical training configurations, including input image resolution, backbone network,
-                feature dimensions, and training strategies. Our model achieves superior metrics while maintaining
+                models adopt identical training configurations. Our model achieves superior metrics while maintaining
                 lightweight architecture with significantly fewer parameters.
               </p>
             </div>

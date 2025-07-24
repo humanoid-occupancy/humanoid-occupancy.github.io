@@ -206,7 +206,7 @@ observer.observe(document.querySelector('#results'));
                 Yijie Guo<sup>1</sup>, Gang Han<sup>1</sup>, Wen Zhao<sup>1</sup>, 
                 Jiahang Cao<sup>1</sup>, Zhang Zhang<sup>1</sup>, Jiaru Zhong<sup>1</sup>,
                 Jingkai Sun<sup>1</sup>, Pihai Sun<sup>1</sup>, Shuai Shi<sup>1</sup>,
-                Zhichao Liu<sup>2</sup>, Botuo Jiang<sup>1</sup>, Yang Wang<sup>2</sup>,
+                Botuo Jiang<sup>1</sup>, Zhichao Liu<sup>2</sup>, Yang Wang<sup>2</sup>,
                 Zheng Zhu<sup>2</sup>,<br> Guan Huang<sup>2</sup>, Qiang Zhang<sup>†Δ1</sup>,
                 and Jian Tang<sup>1</sup>                
               </div>
@@ -214,7 +214,7 @@ observer.observe(document.querySelector('#results'));
               <!-- 作者身份说明 -->
               <div class="is-size-6 publication-authors">
                 <span>
-                  <sup>*</sup>&nbsp;Equal Contributor,&nbsp;
+                  <sup>*</sup>&nbsp;Equal Contributors,&nbsp;
                   <sup>†</sup>&nbsp;Corresponding Author,&nbsp;
                   <sup>Δ</sup>&nbsp;Project and Technical Leader
                 </span>
@@ -361,14 +361,14 @@ observer.observe(document.querySelector('#results'));
           <div class="content has-text-justified">
             <p><strong>Sensor Layout.</strong>
                 Our sensor consists of 6 cameras and a LiDAR.
-                The 6 cameras use standard RGB sensors, arranged in a pattern of one in the front and back and two on each side.
+                The 6 cameras use standard RGB sensors, arranged in a way that one is arranged in the front and back, and two are arranged on each side.
                 The horizontal FOV of the camera is 118 degrees and the vertical FOV is 92 degrees.
                 The LiDAR uses a 40-line 360-degree omnidirectional LiDAR with a vertical FOV of 59 degrees.</p>
           </div>
 
           <div class="content has-text-justified">
             <p><strong>Data Acquisition.</strong> 
-              We use a wearable device with the same sensor configuration as humanoid robots to collect data: human data collectors around 160 cm tall wear it directly on their heads to ensure the sensor height matches that of the final installation on the robot, a neck stabilizer is added to prevent head shaking during collection, and the collectors’ walking speed is limited to no more than 1.2 meters per second with turning angular speed not exceeding 0.4 radians per second.</p>
+              We use a wearable device with the same sensor configuration as humanoid robots to collect data. Human data collectors around 160 cm tall wear it directly on their heads to ensure the sensor height matches that of the final installation on the robot, a neck stabilizer is added to prevent head shaking during collection, and the collectors’ walking speed is limited to no more than 1.2 meters per second with turning angular speed not exceeding 0.4 radians per second.</p>
           </div>
         </div>
       </div>
@@ -397,7 +397,7 @@ observer.observe(document.querySelector('#results'));
           
           <!-- 描述文本 -->
           <div class="content has-text-justified">
-            <p>Collected data is divided into home, industrial, and outdoor scenes, with different point-wise semantic categories defined for annotation in each. Bounding boxes are annotated for dynamic objects (pedestrians, cyclists, vehicles); pedestrians are categorized into special-posture (not representable by bounding boxes) and ordinary-posture (representable by bounding boxes), with only the latter annotated with bounding boxes. Besides dynamic object bounding boxes, point-by-point semantic annotation is done on point clouds: dynamic objects in each clip are removed, remaining static points are superimposed onto multi-frame point clouds, and point-level semantic annotation is performed by referring to the point cloud’s projection on images. For obtaining occupancy ground truth after annotation (see the above figure), superimposed static background points are aligned to the ego coordinate system of frame-by-frame point clouds, superimposed dynamic foreground points are spliced into the point cloud based on the frame’s dynamic object poses, and the superimposed and spliced point cloud is directly voxelized to get the final occupancy ground truth without Poisson reconstruction.</p>
+            <p>Collected data is divided into home, industrial, and outdoor scenes, with different point-wise semantic categories defined for annotation in each. Bounding boxes are annotated for dynamic objects (pedestrians, cyclists, vehicles); pedestrians are categorized into special-posture and ordinary-posture, with only the latter annotated with bounding boxes. Besides dynamic object bounding boxes, point-by-point semantic annotation is done on point clouds: dynamic objects in each clip are removed, remaining static points are superimposed onto multi-frame point clouds, and point-level semantic annotation is performed by referring to the point cloud’s projection on images. For obtaining occupancy ground truth after annotation, superimposed static background points are aligned to the ego coordinate system of frame-by-frame point clouds, superimposed dynamic foreground points are spliced into the point cloud based on the frame’s dynamic object poses, and the superimposed and spliced point cloud is directly voxelized to get the final occupancy ground truth without Poisson reconstruction.</p>
           </div>
         </div>
       </div>
@@ -429,6 +429,7 @@ observer.observe(document.querySelector('#results'));
           <div class="content has-text-justified">
             <p>Our occupancy perception model accepts multimodal inputs, including a LiDAR point cloud and 6 pinhole camera images.
               We use the Bird's Eye View (BEV) paradigm that has been widely validated and adopted in autonomous driving for feature extraction and feature fusion.
+              Since the robotic sensors undergo pitch and roll motions during movement, it is essential to transform the sensor data into a gravity-aligned egocentric reference frame to comply with the BEV assumption.
               Specifically, we extract LiDAR and camera features through two modality-specific feature extraction branches, and then perform multi-modal feature fusion through Transformer Decoder.
               The final occupancy result is predicted on the fused BEV features.</p>
           </div>
@@ -443,7 +444,7 @@ observer.observe(document.querySelector('#results'));
         <div class="column is-full-width">
           <!-- 标题和描述 -->
           <h2 class="title is-3">Experiments and Results</h2>
-          <p>Experiments are conducted on the collected data, including 180 training clips and 20 testing clips. Metrics used for evaluation are mIoU and rayIoU. The perception range is set as [-10m, 10m] for the X and Y axes, and [-1.5m, 0.9m] for the Z-axis in the ego coordinate system. The output occupancy prediction size is 200×200×24 voxels.</p>
+          <p>Experiments are conducted on our collected data, including 180 training clips and 20 validation clips. Metrics used for evaluation are mIoU and rayIoU. The perception range is set as [-10m, 10m] for the X and Y axes, and [-1.5m, 0.9m] for the Z-axis in the ego coordinate system. The output occupancy prediction size is 200×200×24 voxels.</p>
           <br>
           
           <h3 class="title is-4">Benchmark</h3>
@@ -466,12 +467,12 @@ observer.observe(document.querySelector('#results'));
                     alt="Figure 2 Description"
                     class="responsive-image"
                     loading="lazy">
-                <p class="image-caption">RayIoU Performance</p>
+                <p class="image-caption">rayIoU Performance</p>
               </div>
             </div>
           </div>
           <div class="content has-text-justified">
-            <p>We benchmark our method against representative BEV perception models on our multi-modal dataset. All models adopt identical training configurations, including input image resolution, backbone network, feature dimensions, and training strategies.our model achieves superior metrics while maintaining lightweight architecture with significantly fewer parameters.</p>
+            <p>We benchmark our method against representative BEV perception models on our multi-modal dataset. All models adopt identical training configurations, including input image resolution, backbone network, feature dimensions, and training strategies. Our model achieves superior metrics while maintaining lightweight architecture with significantly fewer parameters.</p>
           </div>
 
           <h3 class="title is-4">Visualization Result</h3>
